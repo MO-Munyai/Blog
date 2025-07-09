@@ -1,4 +1,4 @@
-# Blog
+# The Dot Blog
 
 A full-featured blogging platform built with modern web technologies, designed to share articles, ideas, and stories.
 

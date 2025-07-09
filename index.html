@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="root">
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="nav-logo">My Blog</h1>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showHome()">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showProfile()">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showCreatePost()">New Post</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <!-- Home View -->
+            <div id="home-view" class="view active">
+                <div class="container">
+                    <h2>Welcome to My Blog</h2>
+                    <div class="search-bar">
+                        <input type="text" id="search-input" placeholder="Search posts..." onkeyup="searchPosts()">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div id="posts-container" class="posts-grid">
+                        <!-- Posts will be dynamically loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile View -->
+            <div id="profile-view" class="view">
+                <div class="container">
+                    <h2>Edit Profile</h2>
+                    <div class="profile-form">
+                        <div class="profile-avatar">
+                            <img id="profile-image" src="https://via.placeholder.com/150" alt="Profile Picture">
+                            <input type="file" id="avatar-input" accept="image/*" onchange="updateProfileImage()">
+                            <label for="avatar-input" class="avatar-upload-btn">
+                                <i class="fas fa-camera"></i>
+                            </label>
+                        </div>
+                        <form id="profile-form" onsubmit="saveProfile(event)">
+                            <div class="form-group">
+                                <label for="profile-name">Name:</label>
+                                <input type="text" id="profile-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-email">Email:</label>
+                                <input type="email" id="profile-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-bio">Bio:</label>
+                                <textarea id="profile-bio" rows="4" placeholder="Tell us about yourself..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-website">Website:</label>
+                                <input type="url" id="profile-website" placeholder="https://yourwebsite.com">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Profile</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create/Edit Post View -->
+            <div id="post-form-view" class="view">
+                <div class="container">
+                    <h2 id="post-form-title">Create New Post</h2>
+                    <form id="post-form" onsubmit="savePost(event)">
+                        <input type="hidden" id="post-id">
+                        <div class="form-group">
+                            <label for="post-title">Title:</label>
+                            <input type="text" id="post-title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="post-category">Category:</label>
+                            <select id="post-category" required>
+                                <option value="">Select a category</option>
+                                <option value="technology">Technology</option>
+                                <option value="lifestyle">Lifestyle</option>
+                                <option value="travel">Travel</option>
+                                <option value="food">Food</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="post-content">Content:</label>
+                            <textarea id="post-content" rows="10" required placeholder="Write your blog post here..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="post-tags">Tags (comma-separated):</label>
+                            <input type="text" id="post-tags" placeholder="react, javascript, web development">
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Save Post</button>
+                            <button type="button" class="btn btn-secondary" onclick="showHome()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Post Detail View -->
+            <div id="post-detail-view" class="view">
+                <div class="container">
+                    <div id="post-detail-content">
+                        <!-- Post details will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for confirmations -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 id="modal-title">Confirm Action</h3>
+            <p id="modal-message">Are you sure you want to perform this action?</p>
+            <div class="modal-actions">
+                <button id="modal-confirm" class="btn btn-danger">Confirm</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
